@@ -6,6 +6,12 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface MilungAmbulanceWlApp {
+        "basePath": string;
+    }
+    interface MilungAmbulanceWlEditor {
+        "entryId": string;
+    }
     interface MilungAmbulanceWlList {
     }
     interface MyComponent {
@@ -23,8 +29,50 @@ export namespace Components {
         "middle": string;
     }
 }
+export interface MilungAmbulanceWlEditorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMilungAmbulanceWlEditorElement;
+}
+export interface MilungAmbulanceWlListCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMilungAmbulanceWlListElement;
+}
 declare global {
+    interface HTMLMilungAmbulanceWlAppElement extends Components.MilungAmbulanceWlApp, HTMLStencilElement {
+    }
+    var HTMLMilungAmbulanceWlAppElement: {
+        prototype: HTMLMilungAmbulanceWlAppElement;
+        new (): HTMLMilungAmbulanceWlAppElement;
+    };
+    interface HTMLMilungAmbulanceWlEditorElementEventMap {
+        "editor-closed": string;
+    }
+    interface HTMLMilungAmbulanceWlEditorElement extends Components.MilungAmbulanceWlEditor, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMilungAmbulanceWlEditorElementEventMap>(type: K, listener: (this: HTMLMilungAmbulanceWlEditorElement, ev: MilungAmbulanceWlEditorCustomEvent<HTMLMilungAmbulanceWlEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMilungAmbulanceWlEditorElementEventMap>(type: K, listener: (this: HTMLMilungAmbulanceWlEditorElement, ev: MilungAmbulanceWlEditorCustomEvent<HTMLMilungAmbulanceWlEditorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMilungAmbulanceWlEditorElement: {
+        prototype: HTMLMilungAmbulanceWlEditorElement;
+        new (): HTMLMilungAmbulanceWlEditorElement;
+    };
+    interface HTMLMilungAmbulanceWlListElementEventMap {
+        "entry-clicked": string;
+    }
     interface HTMLMilungAmbulanceWlListElement extends Components.MilungAmbulanceWlList, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMilungAmbulanceWlListElementEventMap>(type: K, listener: (this: HTMLMilungAmbulanceWlListElement, ev: MilungAmbulanceWlListCustomEvent<HTMLMilungAmbulanceWlListElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMilungAmbulanceWlListElementEventMap>(type: K, listener: (this: HTMLMilungAmbulanceWlListElement, ev: MilungAmbulanceWlListCustomEvent<HTMLMilungAmbulanceWlListElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLMilungAmbulanceWlListElement: {
         prototype: HTMLMilungAmbulanceWlListElement;
@@ -37,12 +85,22 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "milung-ambulance-wl-app": HTMLMilungAmbulanceWlAppElement;
+        "milung-ambulance-wl-editor": HTMLMilungAmbulanceWlEditorElement;
         "milung-ambulance-wl-list": HTMLMilungAmbulanceWlListElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface MilungAmbulanceWlApp {
+        "basePath"?: string;
+    }
+    interface MilungAmbulanceWlEditor {
+        "entryId"?: string;
+        "onEditor-closed"?: (event: MilungAmbulanceWlEditorCustomEvent<string>) => void;
+    }
     interface MilungAmbulanceWlList {
+        "onEntry-clicked"?: (event: MilungAmbulanceWlListCustomEvent<string>) => void;
     }
     interface MyComponent {
         /**
@@ -59,6 +117,8 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface IntrinsicElements {
+        "milung-ambulance-wl-app": MilungAmbulanceWlApp;
+        "milung-ambulance-wl-editor": MilungAmbulanceWlEditor;
         "milung-ambulance-wl-list": MilungAmbulanceWlList;
         "my-component": MyComponent;
     }
@@ -67,6 +127,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "milung-ambulance-wl-app": LocalJSX.MilungAmbulanceWlApp & JSXBase.HTMLAttributes<HTMLMilungAmbulanceWlAppElement>;
+            "milung-ambulance-wl-editor": LocalJSX.MilungAmbulanceWlEditor & JSXBase.HTMLAttributes<HTMLMilungAmbulanceWlEditorElement>;
             "milung-ambulance-wl-list": LocalJSX.MilungAmbulanceWlList & JSXBase.HTMLAttributes<HTMLMilungAmbulanceWlListElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
