@@ -13,7 +13,7 @@ declare global {
 export class MilungAmbulanceWlApp {
   @State() private relativePath = "";
 
-  @Prop() basePath: string="";
+  @Prop() basePath: string = "";
   @Prop() apiBase: string;
   @Prop() ambulanceId: string;
 
@@ -21,7 +21,7 @@ export class MilungAmbulanceWlApp {
     const baseUri = new URL(this.basePath, document.baseURI || "/").pathname;
 
     const toRelative = (path: string) => {
-      if (path.startsWith( baseUri)) {
+      if (path.startsWith(baseUri)) {
         this.relativePath = path.slice(baseUri.length)
       } else {
         this.relativePath = ""
@@ -40,29 +40,29 @@ export class MilungAmbulanceWlApp {
   render() {
     let element = "list"
     let entryId = "@new"
-  
-    if ( this.relativePath.startsWith("entry/"))
-    {
+
+    if (this.relativePath.startsWith("entry/")) {
       element = "editor";
       entryId = this.relativePath.split("/")[1]
     }
-  
-    const navigate = (path:string) => {
+
+    const navigate = (path: string) => {
       const absolute = new URL(path, new URL(this.basePath, document.baseURI)).pathname;
       window.navigation.navigate(absolute)
     }
-  
+
     return (
       <Host>
-        { element === "editor"
-        ? <milung-ambulance-wl-editor entry-id={entryId}
-            oneditor-closed={ () => navigate("./list")} >
+        {element === "editor"
+          ? <milung-ambulance-wl-editor entry-id={entryId}
+            ambulance-id={this.ambulanceId} api-base={this.apiBase}
+            oneditor-closed={() => navigate("./list")} >
           </milung-ambulance-wl-editor>
-        : <milung-ambulance-wl-list ambulance-id={this.ambulanceId} api-base={this.apiBase}
-            onentry-clicked={ (ev: CustomEvent<string>)=> navigate("./entry/" + ev.detail) } >
+          : <milung-ambulance-wl-list ambulance-id={this.ambulanceId} api-base={this.apiBase}
+            onentry-clicked={(ev: CustomEvent<string>) => navigate("./entry/" + ev.detail)} >
           </milung-ambulance-wl-list>
         }
-  
+
       </Host>
     );
   }

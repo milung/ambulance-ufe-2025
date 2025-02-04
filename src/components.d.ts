@@ -12,6 +12,8 @@ export namespace Components {
         "basePath": string;
     }
     interface MilungAmbulanceWlEditor {
+        "ambulanceId": string;
+        "apiBase": string;
         "entryId": string;
     }
     interface MilungAmbulanceWlList {
@@ -102,6 +104,8 @@ declare namespace LocalJSX {
         "basePath"?: string;
     }
     interface MilungAmbulanceWlEditor {
+        "ambulanceId"?: string;
+        "apiBase"?: string;
         "entryId"?: string;
         "onEditor-closed"?: (event: MilungAmbulanceWlEditorCustomEvent<string>) => void;
     }
